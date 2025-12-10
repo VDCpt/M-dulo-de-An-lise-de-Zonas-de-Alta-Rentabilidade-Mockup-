@@ -58,21 +58,26 @@
             font-size: 1.1em;
             color: #34a853; /* Verde para alta rentabilidade */
         }
-        /* Estilo do Mapa Simulado */
+        
+        /* CÓDIGO DO MAPA SIMULADO (OPÇÃO 1) */
         .mapa-simulado {
             margin-top: 40px;
             height: 300px;
-            background: url('https://via.placeholder.com/900x300?text=Mapa+Simulado+de+Rentabilidade+-+VDC') center center/cover; /* Placeholder para o Mapa */
+            /* Usar um gradiente para simular o mapa de calor */
+            background: linear-gradient(to right, #e8f0fe 0%, #fff 50%, #e8f0fe 100%);
             border: 2px solid #ccc;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5em;
-            color: #fff;
-            text-shadow: 0 0 5px #000;
+            color: #1a73e8; /* Cor azul destacada */
+            text-shadow: none; /* Remover sombra */
             position: relative;
+            font-weight: bold;
         }
+        /* FIM CÓDIGO DO MAPA SIMULADO */
+
         .info-metodologia {
             margin-top: 40px;
             padding: 15px;
@@ -101,7 +106,7 @@
         </div>
         
         <div class="mapa-simulado">
-            MAPA DE CALOR SIMULADO (MAIOR RENTABILIDADE)
+            MAPA DE CALOR DINÂMICO DE RENTABILIDADE (MOCKUP) - DADOS CROWDSOURCING VDC
         </div>
 
         <h3 style="margin-top: 30px; color: #1a73e8;">Ranking de Rentabilidade (Ganho Líquido por KM)</h3>
