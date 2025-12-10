@@ -59,22 +59,18 @@
             color: #34a853; /* Verde para alta rentabilidade */
         }
         
-        /* CÓDIGO DO MAPA SIMULADO (OPÇÃO 1) */
-        .mapa-simulado {
+        /* CÓDIGO DO MAPA SIMULADO (OPÇÃO 2: IMAGEM MAIS REALISTA) */
+        .mapa-simulado-container {
             margin-top: 40px;
-            height: 300px;
-            /* Usar um gradiente para simular o mapa de calor */
-            background: linear-gradient(to right, #e8f0fe 0%, #fff 50%, #e8f0fe 100%);
-            border: 2px solid #ccc;
+            border: 1px solid #ccc;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            color: #1a73e8; /* Cor azul destacada */
-            text-shadow: none; /* Remover sombra */
-            position: relative;
-            font-weight: bold;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .mapa-simulado-container img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         /* FIM CÓDIGO DO MAPA SIMULADO */
 
@@ -105,9 +101,11 @@
             <strong>Metodologia VDC (Crowdsourcing):</strong> Os dados apresentados são gerados pela comunidade Voz Do Condutor. Excluímos dados de "Tarifa Dinâmica" ou "Surge" da Plataforma para isolar as zonas de **alta procura sustentada**.
         </div>
         
-        <div class="mapa-simulado">
-            MAPA DE CALOR DINÂMICO DE RENTABILIDADE (MOCKUP) - DADOS CROWDSOURCING VDC
+        <div class="mapa-simulado-container">
+            <img src="https://via.placeholder.com/900x300/e74c3c/ffffff?text=MAPA+DE+CALOR+RENTABILIDADE+-+Grande+Porto+Simulado+(VDC)" 
+                 alt="Mapa de Calor Dinâmico Simulado do Grande Porto">
         </div>
+        
 
         <h3 style="margin-top: 30px; color: #1a73e8;">Ranking de Rentabilidade (Ganho Líquido por KM)</h3>
         
