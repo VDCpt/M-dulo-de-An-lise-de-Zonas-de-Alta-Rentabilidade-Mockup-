@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Análise de Zonas de Alta Rentabilidade TVDE (VDC Crowdsourcing)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f8;
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+        h2 {
+            text-align: center;
+            font-weight: normal;
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        /* Estilo da Tabela de Rentabilidade */
+        .tabela-rentabilidade {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fcfcfc;
+        }
+        .tabela-rentabilidade th, .tabela-rentabilidade td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .tabela-rentabilidade th {
+            background-color: #1a73e8;
+            color: white;
+            font-weight: 600;
+        }
+        .tabela-rentabilidade tr:hover {
+            background-color: #e8f0fe;
+        }
+        .destaque-rentabilidade {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #34a853; /* Verde para alta rentabilidade */
+        }
+        /* Estilo do Mapa Simulado */
+        .mapa-simulado {
+            margin-top: 40px;
+            height: 300px;
+            background: url('https://via.placeholder.com/900x300?text=Mapa+Simulado+de+Rentabilidade+-+VDC') center center/cover; /* Placeholder para o Mapa */
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: #fff;
+            text-shadow: 0 0 5px #000;
+            position: relative;
+        }
+        .info-metodologia {
+            margin-top: 40px;
+            padding: 15px;
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 8px;
+            font-size: 0.95em;
+            color: #1a73e8;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            padding: 20px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📈 Análise de Zonas de Alta Rentabilidade</h1>
+        <h2>Ganho Líquido por KM: Onde e Quando Ganhar Mais (Dados VDC)</h2>
+        
+        <div class="info-metodologia">
+            <strong>Metodologia VDC (Crowdsourcing):</strong> Os dados apresentados são gerados pela comunidade Voz Do Condutor. Excluímos dados de "Tarifa Dinâmica" ou "Surge" da Plataforma para isolar as zonas de **alta procura sustentada**.
+        </div>
+        
+        <div class="mapa-simulado">
+            MAPA DE CALOR SIMULADO (MAIOR RENTABILIDADE)
+        </div>
+
+        <h3 style="margin-top: 30px; color: #1a73e8;">Ranking de Rentabilidade (Ganho Líquido por KM)</h3>
+        
+        <table class="tabela-rentabilidade">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Zona (Simulada)</th>
+                    <th>Melhor Horário</th>
+                    <th>Ganho Líquido Médio por KM</th>
+                    <th>Fator</th>
+                </tr>
+            </thead>
+            <tbody id="dados-rentabilidade">
+                </tbody>
+        </table>
+
+        <div class="info-metodologia" style="margin-top: 20px;">
+            <strong>O que é Ganho Líquido por KM?</strong><br>
+            É o dinheiro que sobra (Ganho Bruto - Custos Operacionais) dividido pelos quilómetros percorridos. É a **métrica real** da sua rentabilidade, e não apenas o valor da viagem.
+        </div>
+    </div>
+
+    <footer>
+        Desenvolvido por Voz Do Condutor — Plataforma de apoio ao motorista TVDE
+    </footer>
+
+    <script>
+        // Dados de Crowdsourcing SIMULADOS (Mockup)
+        const dadosSimulados = [
+            { zona: "Centro Histórico (001)", horario: "Sex/Sáb - 23h00 às 03h00", ganho: 0.45, fator: "Alta Procura, Baixo KM Ocioso" },
+            { zona: "Zona de Negócios (002)", horario: "Seg a Sex - 07h30 às 09h30", ganho: 0.38, fator: "Viagens Longas, Alta Tarifa Base" },
+            { zona: "Aeroporto (003)", horario: "Todos os dias - 05h00 às 07h00", ganho: 0.32, fator: "Viagens de Alta Distância" },
+            { zona: "Área Industrial (004)", horario: "Seg a Qui - 17h00 às 19h00", ganho: 0.25, fator: "Procura Consistente, Média Distância" },
+            { zona: "Subúrbio Residencial (005)", horario: "Dom - 12h00 às 15h00", ganho: 0.18, fator: "Viagens Curtas, Alto KM Ocioso" }
+        ];
+
+        function carregarDados() {
+            const tbody = document.getElementById('dados-rentabilidade');
+            if (!tbody) return;
+
+            dadosSimulados.sort((a, b) => b.ganho - a.ganho); // Ordenar por ganho descendente
+
+            dadosSimulados.forEach((dado, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td><strong>${dado.zona}</strong></td>
+                    <td>${dado.horario}</td>
+                    <td class="destaque-rentabilidade">${dado.ganho.toFixed(2)}€</td>
+                    <td>${dado.fator}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.onload = carregarDados;
+    </script>
+</body>
+</html>
