@@ -59,18 +59,24 @@
             color: #34a853; /* Verde para alta rentabilidade */
         }
         
-        /* CÓDIGO DO MAPA SIMULADO (OPÇÃO 2: IMAGEM MAIS REALISTA) */
-        .mapa-simulado-container {
+        /* SECÇÃO DO MAPA DE CALOR (SIMULAÇÃO ESTÁVEL CSS) */
+        .mapa-simulado {
             margin-top: 40px;
-            border: 1px solid #ccc;
+            height: 300px;
+            /* Usamos um gradiente de cores que simula o calor */
+            background: linear-gradient(to right, #d93025 0%, #ffc107 40%, #1a73e8 75%); /* Vermelho (Alta Rent.) -> Amarelo -> Azul (Baixa Rent.) */
+            border: 2px solid #ccc;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .mapa-simulado-container img {
-            width: 100%;
-            height: auto;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: white; 
+            text-shadow: 1px 1px 3px #000;
+            position: relative;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
         }
         /* FIM CÓDIGO DO MAPA SIMULADO */
 
@@ -101,11 +107,9 @@
             <strong>Metodologia VDC (Crowdsourcing):</strong> Os dados apresentados são gerados pela comunidade Voz Do Condutor. Excluímos dados de "Tarifa Dinâmica" ou "Surge" da Plataforma para isolar as zonas de **alta procura sustentada**.
         </div>
         
-        <div class="mapa-simulado-container">
-            <img src="https://via.placeholder.com/900x300/e74c3c/ffffff?text=MAPA+DE+CALOR+RENTABILIDADE+-+Grande+Porto+Simulado+(VDC)" 
-                 alt="Mapa de Calor Dinâmico Simulado do Grande Porto">
+        <div class="mapa-simulado">
+            MAPA DE CALOR - GRANDE PORTO (ALTA RENTABILIDADE)
         </div>
-        
 
         <h3 style="margin-top: 30px; color: #1a73e8;">Ranking de Rentabilidade (Ganho Líquido por KM)</h3>
         
